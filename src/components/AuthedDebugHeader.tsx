@@ -15,15 +15,6 @@ export function AuthedDebugHeader() {
       >
         Me
       </Link>
-      <Link
-        to='/chat'
-        activeProps={{
-          class: 'font-bold',
-        }}
-      >
-        Chat
-      </Link>
-
       <div class='flex-1' />
 
       <Button

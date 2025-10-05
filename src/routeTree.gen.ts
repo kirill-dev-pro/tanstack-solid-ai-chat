@@ -13,7 +13,6 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthedRouteImport } from './routes/_authed'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthedMeRouteImport } from './routes/_authed/me'
-import { Route as AuthedChatRouteImport } from './routes/_authed/chat'
 import { Route as ApiChatIndexRouteImport } from './routes/api/chat/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
@@ -36,11 +35,6 @@ const AuthedMeRoute = AuthedMeRouteImport.update({
   path: '/me',
   getParentRoute: () => AuthedRoute,
 } as any)
-const AuthedChatRoute = AuthedChatRouteImport.update({
-  id: '/chat',
-  path: '/chat',
-  getParentRoute: () => AuthedRoute,
-} as any)
 const ApiChatIndexRoute = ApiChatIndexRouteImport.update({
   id: '/api/chat/',
   path: '/api/chat/',
@@ -55,7 +49,6 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
-  '/chat': typeof AuthedChatRoute
   '/me': typeof AuthedMeRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/chat': typeof ApiChatIndexRoute
@@ -63,7 +56,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
-  '/chat': typeof AuthedChatRoute
   '/me': typeof AuthedMeRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/chat': typeof ApiChatIndexRoute
@@ -73,22 +65,20 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authed': typeof AuthedRouteWithChildren
   '/login': typeof LoginRoute
-  '/_authed/chat': typeof AuthedChatRoute
   '/_authed/me': typeof AuthedMeRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/chat/': typeof ApiChatIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/chat' | '/me' | '/api/auth/$' | '/api/chat'
+  fullPaths: '/' | '/login' | '/me' | '/api/auth/$' | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/chat' | '/me' | '/api/auth/$' | '/api/chat'
+  to: '/' | '/login' | '/me' | '/api/auth/$' | '/api/chat'
   id:
     | '__root__'
     | '/'
     | '/_authed'
     | '/login'
-    | '/_authed/chat'
     | '/_authed/me'
     | '/api/auth/$'
     | '/api/chat/'
@@ -132,13 +122,6 @@ declare module '@tanstack/solid-router' {
       preLoaderRoute: typeof AuthedMeRouteImport
       parentRoute: typeof AuthedRoute
     }
-    '/_authed/chat': {
-      id: '/_authed/chat'
-      path: '/chat'
-      fullPath: '/chat'
-      preLoaderRoute: typeof AuthedChatRouteImport
-      parentRoute: typeof AuthedRoute
-    }
     '/api/chat/': {
       id: '/api/chat/'
       path: '/api/chat'
@@ -157,12 +140,10 @@ declare module '@tanstack/solid-router' {
 }
 
 interface AuthedRouteChildren {
-  AuthedChatRoute: typeof AuthedChatRoute
   AuthedMeRoute: typeof AuthedMeRoute
 }
 
 const AuthedRouteChildren: AuthedRouteChildren = {
-  AuthedChatRoute: AuthedChatRoute,
   AuthedMeRoute: AuthedMeRoute,
 }
 

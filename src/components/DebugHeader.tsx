@@ -11,7 +11,7 @@ export function DebugHeader() {
         }}
         activeOptions={{ exact: true }}
       >
-        Home
+        Chat
       </Link>{' '}
       <Link
         to='/login'

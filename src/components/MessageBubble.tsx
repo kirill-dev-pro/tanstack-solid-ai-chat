@@ -1,7 +1,7 @@
 import { Card } from '~/components/ui/card'
 import { cn } from '~/utils/cn'
 import { createMemo, Show } from 'solid-js'
-import { DbMessage } from '~/routes/_authed/chat'
+import { DbMessage } from '~/routes'
 
 export function MessageBubble(props: { message: DbMessage }) {
   const isUser = createMemo(() => props.message.role === 'user')
