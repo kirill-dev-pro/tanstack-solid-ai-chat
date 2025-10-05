@@ -7,6 +7,10 @@ import { RIVER_CLIENT } from '~/lib/river'
 import { RiverRouter } from '../api/chat'
 import { MessageBubble } from '~/components/MessageBubble'
 
+function getRandomId() {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+}
+
 const riverClient = RIVER_CLIENT.createClientCaller<RiverRouter>('/api/chat/')
 
 export const Route = createFileRoute('/_authed/chat')({
@@ -54,7 +58,7 @@ function ChatComponent() {
         {
           role: 'assistant',
           content: '',
-          id: crypto.randomUUID(),
+          id: getRandomId(),
           timestamp: new Date(),
         },
       ])
@@ -99,7 +103,7 @@ function ChatComponent() {
     const newDbMessage: DbMessage = {
       content: inputValue(),
       role: 'user',
-      id: crypto.randomUUID(),
+      id: getRandomId(),
       timestamp: new Date(),
     }
     const newMessages: ModelMessage[] = [
